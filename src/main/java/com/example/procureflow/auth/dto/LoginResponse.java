@@ -1,3 +1,14 @@
 package com.example.procureflow.auth.dto;
 
-public record LoginResponse(String token, String role) {}
+import com.example.procureflow.user.dto.UserResponse;
+
+public record LoginResponse(
+        String token,
+        String tokenType,
+        long expiresInMs,
+        UserResponse user
+) {
+    public static LoginResponse of(String token, long expiresInMs, UserResponse user) {
+        return new LoginResponse(token, "Bearer", expiresInMs, user);
+    }
+}
