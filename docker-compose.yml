@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: procureflow-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-procureflow}
+      POSTGRES_USER: ${POSTGRES_USER:-procureflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-procureflow} -d ${POSTGRES_DB:-procureflow}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: procureflow-api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: ${DB_URL:-jdbc:postgresql://db:5432/procureflow}
+      DB_USERNAME: ${DB_USERNAME:-procureflow}
+      DB_PASSWORD: ${DB_PASSWORD:-change-me}
+      JWT_SECRET: ${JWT_SECRET:-procureflow-super-secret-jwt-key-minimum-32-bytes-needed!}
+      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-3600000}
+      CORS_ALLOWED_ORIGIN: ${CORS_ALLOWED_ORIGIN:-http://localhost:3000}
+      SERVER_PORT: ${SERVER_PORT:-8080}
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
