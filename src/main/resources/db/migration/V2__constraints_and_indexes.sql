@@ -1,0 +1,11 @@
+CREATE INDEX idx_users_department        ON users(department_id);
+CREATE INDEX idx_items_category          ON items(category_id);
+CREATE INDEX idx_requisitions_status     ON requisitions(status);
+CREATE INDEX idx_requisitions_employee   ON requisitions(employee_id);
+CREATE INDEX idx_requisitions_department ON requisitions(department_id);
+CREATE INDEX idx_req_items_requisition   ON requisition_items(requisition_id);
+CREATE INDEX idx_approvals_requisition   ON approvals(requisition_id);
+CREATE INDEX idx_quotations_requisition  ON quotations(requisition_id);
+CREATE INDEX idx_po_supplier             ON purchase_orders(supplier_id);
+CREATE INDEX idx_po_status               ON purchase_orders(status);
+CREATE INDEX idx_stock_mov_item          ON stock_movements(item_id, created_at);
