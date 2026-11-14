@@ -1,3 +1,6 @@
 package com.example.procureflow.approval.dto;
 
-public record ApprovalRequest() {}
+public record ApprovalRequest(
+        String comment
+) {
+}
