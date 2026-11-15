@@ -18,7 +18,7 @@ INSERT INTO users (full_name, email, password_hash, department_id, role_id, enab
     ('Sarah Jenkins', 'manager@procureflow.com', '$2a$10$WnLhXqo3Pv4tvuievsS1YeklVV/SsGWBS2NzlFXh/dp4cYTyxOOTi',
      (SELECT id FROM departments WHERE code = 'IT'),
      (SELECT id FROM roles WHERE name = 'DEPARTMENT_MANAGER'), TRUE),
-    ('Alex Rivera', 'employee@procureflow.com', '$2a$10$WnLhXqo3Pv4tvuievsS1YeklVV/SsGWBS2NzlFXh/dp4cYTyxOOTi',
+    ('Haileamlak derbie', 'employee@procureflow.com', '$2a$10$WnLhXqo3Pv4tvuievsS1YeklVV/SsGWBS2NzlFXh/dp4cYTyxOOTi',
      (SELECT id FROM departments WHERE code = 'IT'),
      (SELECT id FROM roles WHERE name = 'EMPLOYEE'), TRUE),
     ('David Kim', 'finance@procureflow.com', '$2a$10$WnLhXqo3Pv4tvuievsS1YeklVV/SsGWBS2NzlFXh/dp4cYTyxOOTi',
